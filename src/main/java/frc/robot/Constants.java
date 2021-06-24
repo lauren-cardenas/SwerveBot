@@ -33,7 +33,7 @@ public class Constants {
     }
 
     public static final class EncoderRes {
-        public static final int driveRes = 80; //AndyMark CANcoder
+        public static final int driveRes = 80; //AndyMark CIMcoder
         public static final int turnRes = 4096; //VEX Integrated Motor Encoder
     }
 

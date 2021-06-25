@@ -4,18 +4,30 @@
 
 package frc.robot;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonFX;
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.SlewRateLimiter;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Robot extends TimedRobot {
   private final XboxController m_controller = new XboxController(0);
   private final Drivetrain m_swerve = new Drivetrain();
 
+  private final WPI_TalonFX m_leftShooter = new WPI_TalonFX(Constants.ShooterControllers.leftShooter);
+  private final WPI_TalonFX m_rightShooter = new WPI_TalonFX(Constants.ShooterControllers.rightShooter);
+
+  private final DifferentialDrive m_shooter = new DifferentialDrive(m_leftShooter, m_rightShooter);
+
+  private final WPI_TalonSRX m_elevator = new WPI_TalonSRX(Constants.ElevatorControllers.elevator);
+
   // Slew rate limiters to make joystick inputs more gentle; 1/3 sec from 0 to 1.
   private final SlewRateLimiter m_xspeedLimiter = new SlewRateLimiter(3);
-  private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(3);
+  private final SlewRateLimiter m_yspeedLimiter = new SlewRateLimiter(2);
   private final SlewRateLimiter m_rotLimiter = new SlewRateLimiter(3);
 
   @Override
@@ -27,6 +39,16 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     driveWithJoystick(true);
+
+    if(m_controller.getBButton()){
+      m_shooter.arcadeDrive(Constants.ShooterConstants.shooterSpeed, 0.0, false);
+    } else{
+      m_shooter.arcadeDrive(0.0, 0.0, false);
+    }
+
+    m_elevator.set(m_controller.getTriggerAxis(Hand.kRight) * Constants.ElevatorConstants.elevatorSpeed
+                    - m_controller.getTriggerAxis(Hand.kLeft) * Constants.ElevatorConstants.elevatorSpeed);
+    
   }
 
   private void driveWithJoystick(boolean fieldRelative) {

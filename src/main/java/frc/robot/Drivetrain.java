@@ -17,26 +17,30 @@ public class Drivetrain {
   public static final double kMaxAngularSpeed = Math.PI; // 1/2 rotation per second
 
   private final Translation2d m_frontLeftLocation = new Translation2d(
-    Constants.Chassis.posX, Constants.Chassis.posY);
+    Constants.Chassis.frontLeftX, Constants.Chassis.frontLeftY);
   private final Translation2d m_frontRightLocation = new Translation2d(
-    Constants.Chassis.posX, - Constants.Chassis.posY);
+    Constants.Chassis.frontRightX, Constants.Chassis.frontRightY);
   private final Translation2d m_backLeftLocation = new Translation2d(
-    - Constants.Chassis.posX, Constants.Chassis.posY);
+    - Constants.Chassis.backLeftX, Constants.Chassis.backLeftY);
   private final Translation2d m_backRightLocation = new Translation2d(
-    - Constants.Chassis.posX, - Constants.Chassis.posY);
+    - Constants.Chassis.backRightX, - Constants.Chassis.backRightY);
 
   private final SwerveModule m_frontLeft = new SwerveModule(
     Constants.DriveControllers.frontLeft, Constants.TurnControllers.frontLeft, 
-    Constants.DriveEncoders.frontLeftA, Constants.DriveEncoders.frontLeftB);
+    Constants.DriveEncoders.frontLeftA, Constants.DriveEncoders.frontLeftB,
+    Constants.TurnEncoders.frontLeftA, Constants.TurnEncoders.frontLeftB);
   private final SwerveModule m_frontRight = new SwerveModule(
     Constants.DriveControllers.frontRight, Constants.TurnControllers.frontRight,
-    Constants.DriveEncoders.frontRightA, Constants.DriveEncoders.frontRightB);
+    Constants.DriveEncoders.frontRightA, Constants.DriveEncoders.frontRightB,
+    Constants.TurnEncoders.frontRightA, Constants.TurnEncoders.frontRightB);
   private final SwerveModule m_backLeft = new SwerveModule(
     Constants.DriveControllers.backLeft, Constants.TurnControllers.backLeft,
-    Constants.DriveEncoders.backLeftA, Constants.DriveEncoders.backLeftB);
+    Constants.DriveEncoders.backLeftA, Constants.DriveEncoders.backLeftB,
+    Constants.TurnEncoders.backLeftA, Constants.TurnEncoders.backLeftB);
   private final SwerveModule m_backRight = new SwerveModule(
     Constants.DriveControllers.backRight, Constants.TurnControllers.backRight,
-    Constants.DriveEncoders.backRightA, Constants.DriveEncoders.backRightB);
+    Constants.DriveEncoders.backRightA, Constants.DriveEncoders.backRightB,
+    Constants.TurnEncoders.backRightA, Constants.TurnEncoders.backRightB);
 
   private final AHRS m_gyro = new AHRS();
 

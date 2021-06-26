@@ -21,9 +21,9 @@ public class Drivetrain {
   private final Translation2d m_frontRightLocation = new Translation2d(
     Constants.Chassis.frontRightX, Constants.Chassis.frontRightY);
   private final Translation2d m_backLeftLocation = new Translation2d(
-    - Constants.Chassis.backLeftX, Constants.Chassis.backLeftY);
+    Constants.Chassis.backLeftX, Constants.Chassis.backLeftY);
   private final Translation2d m_backRightLocation = new Translation2d(
-    - Constants.Chassis.backRightX, - Constants.Chassis.backRightY);
+    Constants.Chassis.backRightX, Constants.Chassis.backRightY);
 
   private final SwerveModule m_frontLeft = new SwerveModule(
     Constants.DriveControllers.frontLeft, Constants.TurnControllers.frontLeft, 
